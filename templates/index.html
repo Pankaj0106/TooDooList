@@ -1,0 +1,41 @@
+{%extends 'base.html'%}
+
+{%block content%}
+    <h2>List of Tasks:</h2>
+
+    
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Checkbox</th>
+            <th scope="col">Update/Delte</th>
+
+          </tr>
+        </thead>
+        <tbody>
+        {% for lists in list %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{lists.title}}</td>
+            <td>{{lists.description}}</td>
+            <td>{{lists.due_date}}</td>
+            {%if lists.checkbox%}
+              <td><input type="checkbox" checked ></td>
+            {%else%}
+              <td><input type="checkbox" ></td>
+            {%endif%}
+            
+             <td>
+                <a href="{%url 'update' lists.pk%}"><button class='btn btn-success'>Update</button></a>
+                <a href="{%url 'delete' lists.pk%}"><button class='btn btn-danger'>Delete</button></a>
+             </td>
+          </tr>
+        {%endfor%}
+        </tbody>
+      </table>
+    
+{%endblock%}
